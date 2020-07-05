@@ -1,0 +1,87 @@
+[/]
+auto-hide-mouse=true
+control-click-titlebar=true
+control-scroll-zoom=true
+copy-on-select=true
+focus-follow-mouse=true
+middle-click-close=true
+paste-strip-first-char=true
+prompt-on-delete-profile=true
+tab-position='bottom'
+terminal-title-show-when-single=false
+terminal-title-style='none'
+theme-variant='dark'
+use-tabs=true
+window-style='disable-csd-hide-toolbar'
+
+[profiles]
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', 'b54115f5-a359-4b10-a4db-22bf02ebe025']
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+background-color='#555557575353'
+font='Monospace 14'
+foreground-color='#D3D3D7D7CFCF'
+palette=['#2E2E34343636', '#F9F96D6D3131', '#4E4E9A9A0606', '#C4C4A0A00000', '#4C4CB9B9DADA', '#C0C07D7DCCCC', '#2020BABABCBC', '#D3D3D7D7CFCF', '#555557575353', '#F3F382825252', '#8A8AE2E23434', '#FCFCE9E94F4F', '#6F6FD2D2F0F0', '#D0D09F9FCBCB', '#5B5BDDDDDDDD', '#EEEEEEEEECEC']
+scrollback-lines=100000
+terminal-bell='none'
+use-system-font=false
+use-theme-colors=false
+visible-name='Default'
+
+[profiles/b54115f5-a359-4b10-a4db-22bf02ebe025]
+allow-bold=true
+automatic-switch=@as []
+background-color='#555557575353'
+background-transparency-percent=0
+backspace-binding='ascii-delete'
+badge-color='#ffffff'
+badge-color-set=false
+badge-font='Monospace 12'
+badge-position='northeast'
+badge-text=''
+badge-use-system-font=true
+bold-color='#ffffff'
+bold-color-set=false
+bold-is-bright=true
+cell-height-scale=1.0
+cell-width-scale=1.0
+cjk-utf8-ambiguous-width='narrow'
+cursor-background-color='#000000'
+cursor-blink-mode='system'
+cursor-colors-set=false
+cursor-foreground-color='#ffffff'
+cursor-shape='block'
+custom-command='bash -c "PS1=$ " /bin/bash'
+custom-hyperlinks=@as []
+default-size-columns=100
+default-size-rows=24
+delete-binding='delete-sequence'
+dim-transparency-percent=0
+draw-margin=100
+encoding='UTF-8'
+exit-action='close'
+font='Monospace 16'
+foreground-color='#D3D3D7D7CFCF'
+highlight-background-color='#000000'
+highlight-colors-set=false
+highlight-foreground-color='#ffffff'
+login-shell=false
+notify-silence-enabled=false
+notify-silence-threshold=0
+palette=['#2E2E34343636', '#F9F96D6D3131', '#4E4E9A9A0606', '#C4C4A0A00000', '#4C4CB9B9DADA', '#C0C07D7DCCCC', '#2020BABABCBC', '#D3D3D7D7CFCF', '#555557575353', '#F3F382825252', '#8A8AE2E23434', '#FCFCE9E94F4F', '#6F6FD2D2F0F0', '#D0D09F9FCBCB', '#5B5BDDDDDDDD', '#EEEEEEEEECEC']
+rewrap-on-resize=true
+scroll-on-keystroke=true
+scroll-on-output=false
+scrollback-lines=100000
+scrollback-unlimited=false
+select-by-word-chars='-,./?%&#:_'
+shortcut='disabled'
+show-scrollbar=true
+terminal-bell='none'
+terminal-title='${id}: ${title}'
+text-blink-mode='always'
+triggers=@as []
+use-custom-command=true
+use-system-font=false
+use-theme-colors=false
+visible-name='presentation'

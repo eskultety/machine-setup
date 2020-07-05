@@ -1,0 +1,58 @@
+---
+- name: Set machine hostname
+  hostname:
+    name: '{{ hostname }}'
+    use: systemd
+
+- name: SSH - disable root login
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^(PermitRootLogin) yes'
+    replace: '\1 no'
+  notify: restart-sshd
+
+- name: Configure grub to launch console on tty0 and ttyS0 and disable quiet
+  replace:
+    dest: "/etc/default/grub"
+    regexp: "{{ item.regexp }}"
+    replace: "{{ item.replace }}"
+  with_items:
+    - regexp: '(^\s*GRUB_CMDLINE_LINUX\=\"\s*.*?)(?:\s*console\=tty0\s*)*(.*\"*$)'
+      replace: '\1console=tty0 \2'
+    - regexp: '(^\s*GRUB_CMDLINE_LINUX\=\"\s*.*?)(?:\s*console\=ttyS0\,115200n8\s*)*(.*\"*$)'
+      replace: '\1console=ttyS0,115200n8 \2'
+    - regexp: '(^\s*GRUB_CMDLINE_LINUX(?:_DEFAULT)?\=\"\s*.*?)(?:quiet)*(.*\"*$)'
+      replace: '\1\2'
+  notify: update-grub
+
+- name: Disable wayland
+  lineinfile:
+    path: /etc/gdm/custom.conf
+    regexp: '#(WaylandEnable=false)'
+    line: '\1'
+    backrefs: yes
+
+
+- name: Override default journald settings
+  blockinfile:
+    path: /etc/systemd/journald.conf
+    block: |
+      Storage=persistent
+      Compress=yes
+      SplitMode=uid
+      SystemMaxUse=5%
+      SystemMaxFiles=1
+  notify: restart-journald
+
+- name: NetworkManager - use dnsmasq as local resolver
+  copy:
+    dest: /etc/NetworkManager/conf.d/dnsmasq_local_resolver.conf
+    content: |
+      [main]
+      dns=dnsmasq
+
+- name: libvirt-related settings
+  include: tasks/libvirt.yml
+  tags:
+    - devel
+    - workstation

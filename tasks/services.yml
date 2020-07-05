@@ -1,0 +1,28 @@
+- name: Enable services
+- block:
+    - name: Enable generic services
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      loop:
+        - cups-browsed
+        - sshd
+
+    - name: Enable libvirt service
+      service:
+        name: libvirtd
+        state: started
+        enabled: yes
+      tags:
+        - devel
+
+# run this only on baremetal machines
+#- name: Enable baremetal services
+#  service:
+#    name: "{{ item }}"
+#    state: started
+#    enabled: yes
+#  loop:
+#    - fstrim.timer
+#  tags: baremetal

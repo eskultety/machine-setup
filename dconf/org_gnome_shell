@@ -1,0 +1,37 @@
+[/]
+enabled-extensions=['background-logo@fedorahosted.org','launch-new-instance@gnome-shell-extensions.gcampax.github.com','drive-menu@gnome-shell-extensions.gcampax.github.com']
+
+favorite-apps=['firefox.desktop','mozilla-thunderbird.desktop','org.gnome.Nautilus.desktop','com.spotify.Client.desktop','vlc.desktop','virt-manager.desktop','pidgin.desktop']
+
+[extensions/system-monitor]
+center-display=false
+compact-display=true
+cpu-display=true
+cpu-show-menu=true
+cpu-show-text=true
+cpu-style='digit'
+disk-display=false
+fan-display=true
+fan-show-text=false
+fan-style='digit'
+icon-display=false
+memory-display=true
+memory-style='digit'
+net-style='digit'
+
+[keybindings]
+open-application-menu=@as []
+switch-to-application-1=@as []
+switch-to-application-2=@as []
+switch-to-application-3=@as []
+switch-to-application-4=@as []
+switch-to-application-5=@as []
+switch-to-application-6=@as []
+switch-to-application-7=@as []
+switch-to-application-8=@as []
+switch-to-application-9=@as []
+toggle-message-tray=['<Super>n']
+
+[overrides]
+dynamic-workspaces=false
+

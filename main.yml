@@ -1,0 +1,52 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars/users.yml
+  handlers:
+    - name: restart-sshd
+      service:
+        name: sshd
+        state: restarted
+    - name: restart-libvirtd
+      service:
+        name: libvirtd
+        state: restarted
+    - name: restart-journald
+      service:
+        name: systemd-journald
+        state: restarted
+    - name: update-grub
+      command: grub2-mkconfig -o /boot/grub2/grub.cfg
+
+  tasks:
+    - name: Repos
+      include: tasks/repos.yml
+
+    - name: Packages
+      include: tasks/packages.yml
+
+    - name: Services
+      include: tasks/services.yml
+
+    - name: System configuration
+      include: tasks/system_configuration.yml
+
+    - name: User
+      include: tasks/user.yml
+
+    - name: User configuration
+      block:
+      become: true
+      become_user: '{{ user.username }}'
+
+      - name: Firefox
+        include: tasks/firefox.yml
+
+      - name: Flatpak
+        include: tasks/flatpak.yml
+
+      - name: Dconf
+        include: tasks/dconf.yml
+
+      - name: GTK
+        include: tasks/gtk.yml

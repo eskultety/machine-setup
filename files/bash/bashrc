@@ -1,0 +1,22 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# set prompt
+PS1="\[\033[1;32m\]\u@\h \[\033[0m\]\[\033[1;34m\]\W $ \[\033[0m\]"
+
+source ~/.bash/variables
+source ~/.bash/aliases
+source ~/.bash/functions
+
+# SHELL SETTINGS
+shopt -s histappend
+shopt -s extglob
+
+# disable XON/XOFF for readline, so that history reverse search can search
+# forwards with Ctrl+s
+stty -ixon
+

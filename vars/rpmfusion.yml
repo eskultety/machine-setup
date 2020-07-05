@@ -1,0 +1,4 @@
+---
+baseurl: "https://download1.rpmfusion.org"
+free: "{{ baseurl }}/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+nonfree: "{{ baseurl }}/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"

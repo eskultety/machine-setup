@@ -1,0 +1,5 @@
+gclone()
+{
+    URL="{@: -1}"
+    git clone "$@" "$(basename $URL)"
+}

@@ -1,0 +1,31 @@
+---
+- set_fact:
+    ffdir: '/home/{{ user.username }}/.mozilla/firefox'
+
+- name: Create a new default profile
+  file:
+    path: '{{ ffdir }}/{{ user.username }}.default'
+    mode: '0775'
+    state: directory
+
+- name: Override the default profile
+  copy:
+    src: '../files/firefox/profiles.ini'
+    dest: '{{ ffdir }}'
+    force: true
+
+- name: Copy the user.js configuration
+  copy:
+    src: '../files/firefox/user.js'
+    dest: '{{ ffdir }}/{{ user.username }}.default'
+
+- name: Make sure the chrome CSS directory exists
+  file:
+    path: '{{ ffdir }}/{{ user.username }}.default/chrome'
+    state: directory
+
+- name: Copy the custom CSS stylesheet
+  copy:
+    src: '../files/firefox/userChrome.css'
+    dest: '{{ ffdir }}/{{ user.username }}.default/chrome/'
+

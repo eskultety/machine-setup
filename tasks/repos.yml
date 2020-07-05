@@ -1,0 +1,16 @@
+---
+- include_vars: vars/rpmfusion.yml
+
+- name: Enable RPM fusion
+  dnf:
+    name:
+      - "{{ free }}"
+      - "{{ nonfree }}"
+    state: present
+
+- name: Enable virt-preview repo
+  command: "dnf copr enable -y @virtmaint-sig/virt-preview"
+  args:
+    warn: false
+  tags:
+    - devel

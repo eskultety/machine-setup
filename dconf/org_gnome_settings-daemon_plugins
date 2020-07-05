@@ -1,0 +1,37 @@
+[color]
+night-light-enabled=true
+night-light-schedule-automatic=false
+night-light-schedule-from=18.0
+night-light-schedule-to=6.0
+night-light-temperature=uint32 4465
+
+[media-keys]
+control-center=['Tools']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-next/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-prev/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-pause/']
+home=['<Primary><Alt>h']
+
+[media-keys/custom-keybindings/tilix]
+binding='<Super>Return'
+command='tilix'
+name='Terminal'
+
+[media-keys/custom-keybindings/play-next]
+binding='<Super>F12'
+command='playerctl next'
+name='playerctl next'
+
+[media-keys/custom-keybindings/play-prev]
+binding='<Super>F10'
+command='playerctl previous'
+name='playerctl previous'
+
+[media-keys/custom-keybindings/play-pause]
+binding='<Super>F11'
+command='playerctl play-pause'
+name='playerctl play/pause'
+
+[power]
+idle-dim=false
+sleep-inactive-ac-timeout=3600
+sleep-inactive-ac-type='nothing'
+sleep-inactive-battery-timeout=5400

@@ -1,0 +1,12 @@
+export PATH=${PATH}:/usr/sbin:/usr/local/bin:~/.local/bin:~/bin
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export TERMINAL=tilix
+export EDITOR=vim
+export MAKEFLAGS="-j $(( $(nproc) + 1 ))"
+export HISTFILESIZE=10000
+export CCACHE_MAXSIZE="3G"
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+export LIBVIRT_ADMIN_DEFAULT_URI="libvirtd:///system"
+

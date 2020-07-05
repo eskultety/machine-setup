@@ -1,0 +1,34 @@
+---
+- name: Enable libvirt NSS
+  replace:
+    path: /etc/nsswitch.conf
+    regexp: '^(hosts:[ \t]+files) (?!libvirt)(.*)$'
+    replace: '\1 libvirt libvirt_guest \2'
+
+- name: Override default libvirtd settings - outputs
+  replace:
+    path: /etc/libvirt/libvirtd.conf
+    regexp: '^#log_outputs=.*$'
+    replace: 'log_outputs="3:journald 1:file:/var/log/libvirt/libvirtd.log"'
+  notify: restart-libvirtd
+
+- name: Override default libvirtd settings - filters
+  replace:
+    path: /etc/libvirt/libvirtd.conf
+    regexp: '^#log_filters=.*$'
+    replace: 'log_filters="4:object 4:json 4:event 4:rpc 4:util.object 1:*"'
+  notify: restart-libvirtd
+
+- name: Override default libvirtd settings - socket permissions
+  replace:
+    path: /etc/libvirt/libvirtd.conf
+    regexp: '^#unix_sock_group.*$'
+    replace: 'unix_sock_group = "libvirt"'
+  notify: restart-libvirtd
+
+- name: Override default libvirt settings - default URI
+  replace:
+    path: /etc/libvirt/libvirt.conf
+    regexp: '^#uri_default.*$'
+    replace: 'uri_default = "qemu:///system"'
+  notify: restart-libvirtd

@@ -1,0 +1,5 @@
+---
+- name: Copy the CSS stylesheet
+  copy:
+    src: '../files/gtk/gtk.css'
+    dest: '/home/{{ user.username }}/.config/gtk-3.0/'

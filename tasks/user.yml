@@ -1,0 +1,81 @@
+---
+- name: Create '{{ user.username }}' user account
+  user:
+    name: '{{ user.username }}'
+    groups: '{{ user.groups }}'
+    comment: '{{ user.gecos }}'
+    password: '{{ user.password }}'
+    uid: 1234
+
+- name: Create an SSH directory
+  file:
+    path: '/home/{{ user.username }}/.ssh'
+    state: directory
+    mode: '0700'
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+
+- name: Create a git directory
+  file:
+    path: '/home/{{ user.username }}/git'
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+    state: directory
+
+- name: Generate a new machine SSH keypair
+  openssh_keypair:
+    path: '/home/{{ user.username }}/.ssh/machine'
+    comment: '{{ hostname }}'
+    mode: '0644'
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+  tags: ssh
+
+- name: Copy bash configuration
+  copy:
+    src: '../files/bash'
+    dest: '/home/{{ user.username }}/.bash'
+    mode: '0770'
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+
+- name: Override bashrc
+  file:
+    src: '/home/{{ user.username }}/.bash/bashrc'
+    dest: '/home/{{ user.username }}/.bashrc'
+    force: true
+    mode: '0660'
+    state: link
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+
+- block:
+    - name: Disable trackers for the user, part I
+      file:
+        owner: '{{ user.username }}'
+        group: '{{ user.username }}'
+        mode: '0755'
+        path: '/home/{{ user.username }}/.config/systemd/user'
+        state: directory
+      tags: workstation
+
+    - name: Disable trackers for the user, part II
+      file:
+        owner: '{{ user.username }}'
+        group: '{{ user.username }}'
+        src: '/dev/null'
+        dest: '/home/{{ user.username }}/.config/systemd/user/{{ item }}'
+        state: link
+      with_items:
+        - tracker-extract.service
+        - tracker-miner-apps.service
+        - tracker-miner-fs.service
+        - tracker-miner-rss.service
+        - tracker-store.service
+        - tracker-writeback.service
+      tags: workstation
+
+    - name: Disable trackers for the user, part III
+      command: restorecon -Rv '/home/{{ user.username }}/.config/systemd'
+      changed_when: false
+      tags: workstation

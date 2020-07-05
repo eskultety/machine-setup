@@ -1,0 +1,21 @@
+- name: Flatpak - add flathub
+  flatpak_remote:
+    method: system
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    state: present
+
+- name: Flatpak - install Spotify
+  flatpak:
+    method: user
+    name: com.spotify.Client
+    state: present
+  ignore_errors: true
+
+- name: Flatpak - install Slack
+  flatpak:
+    method: user
+    name: com.slack.Slack
+    state: present
+  ignore_errors: true
+
