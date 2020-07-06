@@ -38,6 +38,9 @@
       become: true
       become_user: '{{ user.username }}'
       block:
+        - name: neovim
+          include: tasks/nvim.yml
+
         - name: Firefox
           include: tasks/firefox.yml
 

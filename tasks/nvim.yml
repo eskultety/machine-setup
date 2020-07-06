@@ -1,0 +1,28 @@
+---
+- set_fact:
+    config_dir: '/home/{{ user.username }}/.config/nvim'
+
+- name: install PyPi dependencies (NVIM)
+  pip:
+    name:
+      - jedi
+      - neovim
+    extra_args: --user
+
+- name: create config directory hierarchy (NVIM)
+  file:
+    path: '{{ config_dir }}/autoload'
+    state: directory
+
+- name: install vim-plug manager (NVIM)
+  get_url:
+    url:  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: '{{ config_dir }}/autoload/plug.vim'
+
+- name: copy config (NVIM)
+  copy:
+    src: '../files/init.vim'
+    dest: '{{ config_dir }}'
+
+- name: install plugins (NVIM)
+  command: nvim "+silent! PlugInstall!" +qall!
