@@ -28,4 +28,3 @@
   copy:
     src: '../files/firefox/userChrome.css'
     dest: '{{ ffdir }}/{{ user.username }}.default/chrome/'
-

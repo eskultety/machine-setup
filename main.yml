@@ -50,8 +50,8 @@
         - name: Flatpak
           include: tasks/flatpak.yml
 
-      - name: Dconf
-        include: tasks/dconf.yml
+        - name: Firefox
+          include: tasks/firefox.yml
 
       - name: GTK
         include: tasks/gtk.yml
