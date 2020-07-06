@@ -41,6 +41,13 @@
     owner: '{{ user.username }}'
     group: '{{ user.username }}'
 
+- name: Override flake8
+  copy:
+    src: '../files/flake8'
+    dest: '/home/{{ user.username }}/.config/'
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+
 - block:
     - name: Disable trackers for the user, part I
       file:
