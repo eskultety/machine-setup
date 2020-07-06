@@ -1,5 +1,5 @@
 - name: Enable services
-- block:
+  block:
     - name: Enable generic services
       service:
         name: "{{ item }}"
