@@ -26,9 +26,8 @@
 
 - name: Copy bash configuration
   copy:
-    src: '../files/bash'
+    src: '../files/bash/'
     dest: '/home/{{ user.username }}/.bash'
-    mode: '0770'
     owner: '{{ user.username }}'
     group: '{{ user.username }}'
 
