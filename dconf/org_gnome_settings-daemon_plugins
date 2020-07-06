@@ -7,8 +7,13 @@ night-light-temperature=uint32 4465
 
 [media-keys]
 control-center=['Tools']
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-next/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-prev/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-pause/']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix-presentation/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-next/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-prev/','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/play-pause/']
 home=['<Primary><Alt>h']
+
+[media-keys/custom-keybindings/tilix-presentation]
+binding='<Shift><Super>Return'
+command='tilix -p presentation'
+name='Terminal - presentation mode'
 
 [media-keys/custom-keybindings/tilix]
 binding='<Super>Return'

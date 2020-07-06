@@ -51,7 +51,7 @@ cursor-blink-mode='system'
 cursor-colors-set=false
 cursor-foreground-color='#ffffff'
 cursor-shape='block'
-custom-command='bash -c "PS1=$ " /bin/bash'
+custom-command="bash -c '/bin/bash --rcfile <(cat ~/.bashrc; echo \"export PS1=\\\"$ \\\"\")'"
 custom-hyperlinks=@as []
 default-size-columns=100
 default-size-rows=24
@@ -60,7 +60,7 @@ dim-transparency-percent=0
 draw-margin=100
 encoding='UTF-8'
 exit-action='close'
-font='Monospace 16'
+font='Monospace 22'
 foreground-color='#D3D3D7D7CFCF'
 highlight-background-color='#000000'
 highlight-colors-set=false
@@ -78,7 +78,7 @@ select-by-word-chars='-,./?%&#:_'
 shortcut='disabled'
 show-scrollbar=true
 terminal-bell='none'
-terminal-title='${id}: ${title}'
+terminal-title='Presentation'
 text-blink-mode='always'
 triggers=@as []
 use-custom-command=true
