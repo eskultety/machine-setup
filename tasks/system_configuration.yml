@@ -1,9 +1,4 @@
 ---
-- name: Set machine hostname
-  hostname:
-    name: '{{ hostname }}'
-    use: systemd
-
 - name: SSH - disable root login
   replace:
     path: /etc/ssh/sshd_config

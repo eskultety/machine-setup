@@ -18,7 +18,7 @@
 - name: Generate a new machine SSH keypair
   openssh_keypair:
     path: '/home/{{ user.username }}/.ssh/machine'
-    comment: '{{ hostname }}'
+    comment: '{{ ansible_hostname }}'
     mode: '0644'
     owner: '{{ user.username }}'
     group: '{{ user.username }}'
