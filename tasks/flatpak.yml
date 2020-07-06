@@ -1,6 +1,6 @@
 - name: Flatpak - add flathub
   flatpak_remote:
-    method: system
+    method: user
     name: flathub
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     state: present
