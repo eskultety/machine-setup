@@ -41,6 +41,9 @@
         - name: neovim
           include: tasks/nvim.yml
 
+        - name: git
+          include: tasks/git.yml
+
         - name: Firefox
           include: tasks/firefox.yml
 

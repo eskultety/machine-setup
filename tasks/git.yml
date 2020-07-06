@@ -1,0 +1,16 @@
+---
+- name: copy global git configs
+  copy:
+    src: '../files/git/{{ item }}'
+    dest: '/home/{{ user.username }}/.{{ item }}'
+  loop:
+    - 'gitconfig'
+    - 'gitconfig-personal'
+    - 'gitignore'
+
+- name: Create the HOME/git directory
+  file:
+    path: '/home/{{ user.username }}/git'
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+    state: directory

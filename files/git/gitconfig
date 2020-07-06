@@ -1,0 +1,38 @@
+[user]
+    name = Erik Skultety
+
+[color]
+    ui = auto
+    diff = auto
+
+[alias]
+    st = status
+    co = checkout
+    ci = commit
+    br = branch
+    fp = format-patch
+    ds = describe
+    rb = rebase
+    pl = pull
+    mine = log --author=Skultety
+    visual = tig
+    vimdiff = !env GIT_EXTERNAL_DIFF=vimgitdiff git --no-pager diff
+
+[format]
+    pretty = fuller
+    numbered = auto
+    thread = shallow
+    coverLetter = auto
+
+[merge]
+    tool = vimdiff
+
+[diff]
+    renames = true
+    algorithm = patience
+
+[core]
+    excludesfile = ~/.gitignore
+
+[grep]
+    patternType = extended

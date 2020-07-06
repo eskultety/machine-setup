@@ -15,13 +15,6 @@
     owner: '{{ user.username }}'
     group: '{{ user.username }}'
 
-- name: Create a git directory
-  file:
-    path: '/home/{{ user.username }}/git'
-    owner: '{{ user.username }}'
-    group: '{{ user.username }}'
-    state: directory
-
 - name: Generate a new machine SSH keypair
   openssh_keypair:
     path: '/home/{{ user.username }}/.ssh/machine'
