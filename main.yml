@@ -35,15 +35,14 @@
       include: tasks/user.yml
 
     - name: User configuration
-      block:
       become: true
       become_user: '{{ user.username }}'
+      block:
+        - name: Firefox
+          include: tasks/firefox.yml
 
-      - name: Firefox
-        include: tasks/firefox.yml
-
-      - name: Flatpak
-        include: tasks/flatpak.yml
+        - name: Flatpak
+          include: tasks/flatpak.yml
 
       - name: Dconf
         include: tasks/dconf.yml
