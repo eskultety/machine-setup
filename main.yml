@@ -17,6 +17,8 @@
         state: restarted
     - name: update-grub
       command: grub2-mkconfig -o /boot/grub2/grub.cfg
+    - name: reboot-machine
+      reboot:
 
   tasks:
     - name: Repos
@@ -55,3 +57,6 @@
 
       - name: GTK
         include: tasks/gtk.yml
+
+    - name: Final cleanup
+      include: tasks/cleanup.yml

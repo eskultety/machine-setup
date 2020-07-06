@@ -149,8 +149,3 @@
   ignore_errors: true
   tags:
     - extras-gui
-
-- name: Reboot into a fresh instance
-  reboot:
-    reboot_timeout: 200
-  when: result is changed

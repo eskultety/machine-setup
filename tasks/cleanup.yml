@@ -1,0 +1,5 @@
+---
+- name: Autoremove unused packages
+  dnf:
+    autoremove: true
+  notify: reboot-machine
