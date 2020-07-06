@@ -46,17 +46,17 @@
         - name: git
           include: tasks/git.yml
 
+        - name: GTK
+          include: tasks/gtk.yml
+
         - name: Firefox
           include: tasks/firefox.yml
+
+        - name: Dconf
+          include: tasks/dconf.yml
 
         - name: Flatpak
           include: tasks/flatpak.yml
-
-        - name: Firefox
-          include: tasks/firefox.yml
-
-      - name: GTK
-        include: tasks/gtk.yml
 
     - name: Final cleanup
       include: tasks/cleanup.yml
