@@ -6,6 +6,10 @@
     name:
       - "{{ free }}"
       - "{{ nonfree }}"
+
+    # Uncomment the below parameter if installation fails with GPG verification
+    # of the RPMFusion repos, normally it doesn't happen, but sometimes it does
+    #disable_gpg_check: yes
     state: present
 
 - name: Enable virt-preview repo
