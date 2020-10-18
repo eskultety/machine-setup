@@ -28,3 +28,8 @@
   copy:
     src: '../files/firefox/userChrome.css'
     dest: '{{ ffdir }}/{{ user.username }}.default/chrome/'
+
+- name: Copy the search engine settings compressed JSON
+  copy:
+    src: '../files/firefox/search.json.mozlz4'
+    dest: '{{ ffdir }}/{{ user.username }}.default/'
