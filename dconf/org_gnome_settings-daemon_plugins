@@ -22,17 +22,17 @@ name='Terminal'
 
 [media-keys/custom-keybindings/play-next]
 binding='<Super>F12'
-command='playerctl next'
+command='playerctl --ignore-player=firefox,chrome next'
 name='playerctl next'
 
 [media-keys/custom-keybindings/play-prev]
 binding='<Super>F10'
-command='playerctl previous'
+command='playerctl --ignore-player=firefox,chrome previous'
 name='playerctl previous'
 
 [media-keys/custom-keybindings/play-pause]
 binding='<Super>F11'
-command='playerctl play-pause'
+command='playerctl --ignore-player=firefox,chrome play-pause'
 name='playerctl play/pause'
 
 [power]
