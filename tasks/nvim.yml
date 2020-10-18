@@ -26,3 +26,19 @@
 
 - name: install plugins (NVIM)
   command: nvim "+silent! PlugInstall!" +qall!
+
+- name: Adjust the git patch tags keyboard shortcuts
+  block:
+    - name: Adjust the \'Reviewed-by\' shortcut
+      lineinfile:
+        path: '/home/{{ user.username }}/.vim/git_patch_tags.vim'
+        regexp: '^(.*)rev (:call GitReviewed.*$)'
+        line: '\1rb \2'
+        backrefs: yes
+
+    - name: Adjust the \'Signed-off-by\' shortcut
+      lineinfile:
+        path: '/home/{{ user.username }}/.vim/git_patch_tags.vim'
+        regexp: '^(.*)sob (:call GitSignOff.*$)'
+        line: '\1sb \2'
+        backrefs: yes
