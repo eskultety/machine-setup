@@ -15,6 +15,13 @@
     owner: '{{ user.username }}'
     group: '{{ user.username }}'
 
+- name: Touch the SSH config
+  file:
+    path: '/home/{{ user.username }}/.ssh/config'
+    mode: '0600'
+    owner: '{{ user.username }}'
+    group: '{{ user.username }}'
+
 - name: Generate a new machine SSH keypair
   openssh_keypair:
     path: '/home/{{ user.username }}/.ssh/machine'
