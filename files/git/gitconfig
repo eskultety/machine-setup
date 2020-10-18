@@ -17,6 +17,8 @@
     mine = log --author=Skultety
     visual = tig
     vimdiff = !env GIT_EXTERNAL_DIFF=vimgitdiff git --no-pager diff
+    added = log --diff-filter=A
+    deleted = log --diff-filter=D
 
 [format]
     pretty = fuller
