@@ -65,8 +65,6 @@
       - tree
       - unzip
       - util-linux
-      - vim-enhanced
-      - vim-X11
       - virt-what
       - wget
 
