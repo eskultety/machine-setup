@@ -1,35 +1,49 @@
 ---
 - set_fact:
     ffdir: '/home/{{ user.username }}/.mozilla/firefox'
+  tags:
+    - workstation
 
 - name: Create a new default profile
   file:
     path: '{{ ffdir }}/{{ user.username }}.default'
     mode: '0775'
     state: directory
+  tags:
+    - workstation
 
 - name: Override the default profile
   copy:
     src: '../files/firefox/profiles.ini'
     dest: '{{ ffdir }}'
     force: true
+  tags:
+    - workstation
 
 - name: Copy the user.js configuration
   copy:
     src: '../files/firefox/user.js'
     dest: '{{ ffdir }}/{{ user.username }}.default'
+  tags:
+    - workstation
 
 - name: Make sure the chrome CSS directory exists
   file:
     path: '{{ ffdir }}/{{ user.username }}.default/chrome'
     state: directory
+  tags:
+    - workstation
 
 - name: Copy the custom CSS stylesheet
   copy:
     src: '../files/firefox/userChrome.css'
     dest: '{{ ffdir }}/{{ user.username }}.default/chrome/'
+  tags:
+    - workstation
 
 - name: Copy the search engine settings compressed JSON
   copy:
     src: '../files/firefox/search.json.mozlz4'
     dest: '{{ ffdir }}/{{ user.username }}.default/'
+  tags:
+    - workstation

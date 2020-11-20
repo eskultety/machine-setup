@@ -18,6 +18,7 @@
 - name: Touch the SSH config
   file:
     path: '/home/{{ user.username }}/.ssh/config'
+    state: touch
     mode: '0600'
     owner: '{{ user.username }}'
     group: '{{ user.username }}'

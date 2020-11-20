@@ -1,21 +1,26 @@
 - name: Remove generic unwanted packages
-  yum:
+  package:
     state: absent
-    name:
-      - anaconda
-      - NetworkManager-adsl
-      - NetworkManager-openconnect
-      - NetworkManager-pptp
-      - NetworkManager-team
-      - NetworkManager-vpnc
-      - NetworkManager-wwan
-      - telnet
+    name: "{{ item }}"
   ignore_errors: true
+  loop:
+    - anaconda
+    - NetworkManager-adsl
+    - NetworkManager-openconnect
+    - NetworkManager-pptp
+    - NetworkManager-team
+    - NetworkManager-vpnc
+    - NetworkManager-wwan
+    - telnet
+  tags:
+    - core
 
 - name: Remove workstation unwanted packages
   yum:
     state: absent
-    name:
+    name: "{{ item }}"
+  ignore_errors: true
+  loop:
       - baobab
       - cheese
       - evolution
@@ -36,117 +41,123 @@
       - "qt*"
       - rhythmbox
       - totem
-  ignore_errors: true
-  tags: workstation
+  tags:
+    - workstation
 
 - name: Update all packages
-  dnf:
+  package:
     name: "*"
     state: latest
   register: result
 
 - name: Install core packages
-  yum:
+  package:
     state: latest
-    name:
-      - bash-completion
-      - dnf-utils
-      - ethtool
-      - htop
-      - ltrace
-      - man-pages
-      - mc
-      - ncdu
-      - neovim
-      - podman
-      - rpmconf
-      - rsync
-      - strace
-      - tree
-      - unzip
-      - util-linux
-      - virt-what
-      - wget
+    name: "{{ item }}"
+  loop:
+    - bash-completion
+    - ethtool
+    - htop
+    - ltrace
+    - man-pages
+    - mc
+    - ncdu
+    - neovim
+    - podman
+    - rpmconf
+    - rsync
+    - strace
+    - tmux
+    - tree
+    - unzip
+    - util-linux
+    - virt-what
+    - wget
+    - "{{ ansible_pkg_mgr }}-utils"
+    - "{{ ansible_python_version.split('.')[0] }}-pip"
+  tags:
+    - core
 
 - name: Install development packages
-  yum:
+  package:
     state: latest
-    name:
-      - black
-      - gdb
-      - git
-      - git-publish
-      - git-review
-      - ipython3
-      - libguestfs-tools
-      - libvirt
-      - libvirt-nss
-      - make
-      - meson # drop this one once I move it to a dedicated libvirt role
-      - ninja # drop this one once I move it to a dedicated libvirt role
-      - patch
-      - python3-devel
-      - python3-dnf-plugin-system-upgrade
-      - rpm-build
-      - tig
-      - virt-install
-      - valgrind
+    name: "{{ item }}"
+  loop:
+    - black
+    - gdb
+    - git
+    - git-publish
+    - git-review
+    - ipython3
+    - libguestfs-tools
+    - libvirt
+    - libvirt-nss
+    - make
+    - meson # drop this one once I move it to a dedicated libvirt role
+    - patch
+    - python3-devel
+    - python3-dnf-plugin-system-upgrade
+    - rpm-build
+    - tig
+    - virt-install
+    - valgrind
   tags:
     - devel
 
 - name: Install core workstation packages
-  yum:
+  package:
     state: latest
-    name:
-      - dbus-x11 # provides the dbus-launch command which the dconf task needs
-      - dconf-editor
-      - ffmpeg-libs
-      - gnome-tweaks
-      - NetworkManager-tui
-      - tilix
-      - tuned
-      - virt-manager
+    name: "{{ item }}"
+  loop:
+    - dbus-x11 # provides the dbus-launch command which the dconf task needs
+    - dconf-editor
+    - ffmpeg-libs
+    - gnome-tweaks
+    - NetworkManager-tui
+    - tilix
+    - tuned
+    - virt-manager
   ignore_errors: true
   tags: workstation
 
 - name: Install extra packages (CLI)
-  yum:
+  package:
     state: latest
-    name:
-      - android-tools
-      - ansible
-      - geteltorito
-      - lm_sensors
-      - neovim
-      - powerline
-      - python3-flake8
-      - python3-glances
-      - python3-ipdb
-      - tmux
-      - vim-powerline
-      - zsh
+    name: "{{ item }}"
+  loop:
+    - android-tools
+    - ansible
+    - geteltorito
+    - lm_sensors
+    - powerline
+    - python3-flake8
+    - python3-glances
+    - python3-ipdb
+    - vim-powerline
+    - zsh
   tags:
     - extras-cli
 
 - name: Install extra packages (GUI)
-  yum:
+  package:
     state: latest
-    name:
-      - bsd-games # contains the wtf command :)
-      - flatpak
-      - gimp
-      - gnome-shell-extension-drive-menu
-      - gnome-shell-extension-launch-new-instance
-      - gnome-shell-extension-suspend-button
-      - gnome-shell-extension-system-monitor-applet
-      - inkscape
-      - playerctl
-      - pidgin
-      - seahorse
-      - thunderbird
-      - vlc
-      - wireshark
-      - youtube-dl
+    name: "{{ item }}"
+  loop:
+    - bsd-games # contains the wtf command :)
+    - flatpak
+    - gimp
+    - gnome-shell-extension-drive-menu
+    - gnome-shell-extension-launch-new-instance
+    - gnome-shell-extension-suspend-button
+    - gnome-shell-extension-system-monitor-applet
+    - inkscape
+    - playerctl
+    - pidgin
+    - seahorse
+    - thunderbird
+    - vlc
+    - wireshark
+    - youtube-dl
   ignore_errors: true
   tags:
     - extras-gui

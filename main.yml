@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   vars_files:
     - vars/users.yml
   handlers:
@@ -35,6 +35,7 @@
 
     - name: User
       include: tasks/user.yml
+      tags: core
 
     - name: User configuration
       become: true
@@ -42,21 +43,27 @@
       block:
         - name: neovim
           include: tasks/nvim.yml
+          tags: core
 
         - name: git
           include: tasks/git.yml
+          tags: devel
 
         - name: GTK
           include: tasks/gtk.yml
+          tags: workstation
 
         - name: Firefox
           include: tasks/firefox.yml
+          tags: workstation
 
         - name: Dconf
           include: tasks/dconf.yml
+          tags: workstation
 
         - name: Flatpak
           include: tasks/flatpak.yml
+          tags: workstation
 
     - name: Final cleanup
       include: tasks/cleanup.yml

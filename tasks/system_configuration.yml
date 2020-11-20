@@ -26,7 +26,8 @@
     regexp: '#(WaylandEnable=false)'
     line: '\1'
     backrefs: yes
-
+  tags:
+    - workstation
 
 - name: Override default journald settings
   blockinfile:

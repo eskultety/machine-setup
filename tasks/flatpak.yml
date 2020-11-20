@@ -4,6 +4,8 @@
     name: flathub
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     state: present
+  tags:
+    - workstation
 
 - name: Flatpak - install Spotify
   flatpak:
@@ -11,6 +13,8 @@
     name: com.spotify.Client
     state: present
   ignore_errors: true
+  tags:
+    - workstation
 
 - name: Flatpak - install Slack
   flatpak:
@@ -18,4 +22,6 @@
     name: com.slack.Slack
     state: present
   ignore_errors: true
+  tags:
+    - workstation
 

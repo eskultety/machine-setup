@@ -5,6 +5,9 @@ picture-uri='file:////usr/share/gnome-control-center/pixmaps/noise-texture-light
 primary-color='#425265'
 secondary-color='#425265'
 
+[calendar]
+show-weekdate=true
+
 [input-sources]
 sources=[('xkb', 'us'), ('xkb', 'cz+qwerty')]
 xkb-options=@as []
@@ -18,6 +21,7 @@ gtk-im-module='gtk-im-context-simple'
 monospace-font-name='Monospace 13'
 show-battery-percentage=true
 toolkit-accessibility=false
+enable-hot-corners=false
 
 [notifications]
 application-children=['org-gnome-software', 'org-gnome-tweaks']

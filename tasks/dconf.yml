@@ -3,15 +3,21 @@
     src: './dconf'
     dest: '/tmp/'
     mode: '0755'
+  tags:
+    - workstation
 
 - name: Copy the populating Python script
   copy:
     src: './dconf.py'
     dest: '/tmp/'
     mode: '0755'
+  tags:
+    - workstation
 
 - name: Populate the dconf database from config files
   shell:
     cmd: '/tmp/dconf.py'
     chdir: '/tmp/'
+  tags:
+    - workstation
 
