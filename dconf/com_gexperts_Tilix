@@ -19,7 +19,7 @@ list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', 'b54115f5-a359-4b10-a4db-22bf02ebe
 
 [profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
 background-color='#555557575353'
-font='Monospace 14'
+font='DejaVu Sans Mono 13'
 foreground-color='#D3D3D7D7CFCF'
 palette=['#2E2E34343636', '#F9F96D6D3131', '#4E4E9A9A0606', '#C4C4A0A00000', '#4C4CB9B9DADA', '#C0C07D7DCCCC', '#2020BABABCBC', '#D3D3D7D7CFCF', '#555557575353', '#F3F382825252', '#8A8AE2E23434', '#FCFCE9E94F4F', '#6F6FD2D2F0F0', '#D0D09F9FCBCB', '#5B5BDDDDDDDD', '#EEEEEEEEECEC']
 scrollback-lines=100000
@@ -36,7 +36,7 @@ background-transparency-percent=0
 backspace-binding='ascii-delete'
 badge-color='#ffffff'
 badge-color-set=false
-badge-font='Monospace 12'
+badge-font='DejaVu Sans Mono 13'
 badge-position='northeast'
 badge-text=''
 badge-use-system-font=true
@@ -60,7 +60,7 @@ dim-transparency-percent=0
 draw-margin=100
 encoding='UTF-8'
 exit-action='close'
-font='Monospace 22'
+font='DejaVu Sans Mono 22'
 foreground-color='#D3D3D7D7CFCF'
 highlight-background-color='#000000'
 highlight-colors-set=false
