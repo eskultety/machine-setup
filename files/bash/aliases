@@ -1,13 +1,8 @@
 # aliases
 alias vim="nvim"
-alias m="make"
 
 # git aliases
 alias g="git"
-alias gst="git status"
-alias gpl="git pull"
-alias gcd='cd $(git root)'
-alias gco="git checkout"
 alias grb="git rebase"
 alias grbc="git rebase --continue"
 alias ggrep="git grep -Enpi"
@@ -18,9 +13,7 @@ alias cdl="cd $HOME/git/libvirt.git/"
 alias cdq="cd $HOME/git/qemu.git/"
 
 alias mck="pushd .; cd build; make check && make syntax-check; popd"
-alias mca="pushd .; cd build; make clean all; popd"
 alias ma="pushd .; make clean all check && make syntax-check; popd"
-alias ms="pushd .; make syntax-check; popd"
 
 if [[ -d "$HOME/git/libvirt.git" ]]; then
     alias virsh="$HOME/git/libvirt.git/build/tools/virsh -k 0 -K 0"
