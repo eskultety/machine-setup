@@ -17,9 +17,11 @@
         - "{{ nonfree.rpm }}"
       state: present
 
-- name: Enable virt-preview repo
-  command: "dnf copr enable -y @virtmaint-sig/virt-preview"
-  args:
-    warn: false
-  tags:
-    - devel
+  - name: Enable virt-preview repo
+    command: "dnf copr enable -y @virtmaint-sig/virt-preview"
+    args:
+      warn: false
+    tags:
+      - devel
+  when:
+    - ansible_distribution  == "Fedora"
