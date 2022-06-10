@@ -10,7 +10,8 @@ highlight Pmenu ctermbg=7
 highlight PmenuSel ctermfg=7
 highlight PmenuThumb ctermbg=black
 
-autocmd BufEnter * call ncm2#enable_for_buffer() "enable nvim-completer for all buffers
+let g:deoplete#enable_at_startup=1
+
 
 set nocompatible            "don't try to be Vi compatible
 set bg=dark                 "theme
@@ -36,8 +37,9 @@ set laststatus=2
 "[KEY MAPPINGS]
 let mapleader=","               "mod key
 
-"remap ESC to ii
-imap ii <Esc>
+"remap ESC to jj,jk,kj
+imap jj <Esc>
+imap kj <Esc>
 
 " access the compilation errors with Ctrl+up/down rather than with :c{next,prev}
 map <C-down> :cnext<CR>
@@ -60,6 +62,15 @@ nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+" NERDTree
+nnoremap <C-A-v> :NERDTreeToggle<CR>
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 "[EDITOR]
 " spell check
@@ -96,29 +107,9 @@ let g:strip_whitespace_confirm = 0
 let g:strip_only_modified_lines = 1
 let g:strip_whitelines_at_eof = 1
 
-
-" @ncm2
-" help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-
-let ncm2#popup_delay = 5
-let ncm2#matcher = 'substr'
-
 " Use <TAB> to select the popup menu
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-
-" @syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height = 5
 
 
 "file types
@@ -132,26 +123,35 @@ autocmd FileType go setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 autocmd BufRead,BufNewFile *.am setlocal shiftwidth=8 softtabstop=0 noexpandtab
 
 
+"airline
+let g:airline_powerline_fonts=1
+
+
+"auto-git-diff
+let g:auto_git_diff_show_window_at_right=1
+
+
 "[PLUGINS]
 call plug#begin('~/.vim/plugged')
 
+Plug 'cespare/vim-toml'
+Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
-Plug 'cespare/vim-toml'
+Plug 'ntpeters/vim-better-whitespace'
 
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-pyclang'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
 
-Plug 'vim-syntastic/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/git_patch_tags.vim'
+Plug 'hotwatermorning/auto-git-diff'
+
+Plug 'preservim/nerdtree'
 
 call plug#end()
