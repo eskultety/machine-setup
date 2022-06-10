@@ -71,7 +71,7 @@
     - virt-what
     - wget
     - "{{ ansible_pkg_mgr }}-utils"
-    - "{{ ansible_python_version.split('.')[0] }}-pip"
+    - "python{{ ansible_python_version.split('.')[0] }}-pip"
 
 - name: Install development packages
   package:
