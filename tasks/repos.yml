@@ -2,19 +2,12 @@
 - include_vars: vars/rpmfusion.yml
 
 - block:
-  - name: Import RPM fusion GPG keys
-    rpm_key:
-      key: "{{ item }}"
-      state: present
-    loop:
-      - "{{ free.gpg }}"
-      - "{{ nonfree.gpg }}"
-
   - name: Enable RPM fusion
     dnf:
       name:
         - "{{ free.rpm }}"
         - "{{ nonfree.rpm }}"
+      disable_gpg_check: true
       state: present
 
   - name: Enable virt-preview repo
