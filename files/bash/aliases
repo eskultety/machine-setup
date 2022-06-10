@@ -1,5 +1,6 @@
 # aliases
 alias vim="nvim"
+alias ff="firefox"
 
 # git aliases
 alias g="git"
@@ -8,6 +9,7 @@ alias grbc="git rebase --continue"
 alias ggrep="git grep -Enpi"
 alias ggrep20="ggrep -C 20"
 
+alias cdgr="cd $(git root)"
 alias cdg="cd $HOME/git"
 alias cdl="cdg; cd libvirt.git"
 alias cdq="cdg; cd qemu.git"
