@@ -1,16 +1,21 @@
 ---
 - include_vars: vars/rpmfusion.yml
 
-- name: Enable RPM fusion
-  dnf:
-    name:
-      - "{{ free }}"
-      - "{{ nonfree }}"
+- block:
+  - name: Import RPM fusion GPG keys
+    rpm_key:
+      key: "{{ item }}"
+      state: present
+    loop:
+      - "{{ free.gpg }}"
+      - "{{ nonfree.gpg }}"
 
-    # Uncomment the below parameter if installation fails with GPG verification
-    # of the RPMFusion repos, normally it doesn't happen, but sometimes it does
-    #disable_gpg_check: yes
-    state: present
+  - name: Enable RPM fusion
+    dnf:
+      name:
+        - "{{ free.rpm }}"
+        - "{{ nonfree.rpm }}"
+      state: present
 
 - name: Enable virt-preview repo
   command: "dnf copr enable -y @virtmaint-sig/virt-preview"
