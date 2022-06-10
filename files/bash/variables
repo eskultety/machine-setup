@@ -9,4 +9,5 @@ export HISTFILESIZE=10000
 export CCACHE_MAXSIZE="3G"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 export LIBVIRT_ADMIN_DEFAULT_URI="libvirtd:///system"
-
+export PYTHONBREAKPOINT=ipdb.set_trace
+export SSH_COMMON_ARGS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
