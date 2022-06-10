@@ -92,6 +92,7 @@
     - patch
     - python3-devel
     - python3-dnf-plugin-system-upgrade
+    - python3-wheel
     - rpm-build
     - tig
     - virt-install
