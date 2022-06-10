@@ -9,14 +9,11 @@ alias ggrep="git grep -Enpi"
 alias ggrep20="ggrep -C 20"
 
 alias cdg="cd $HOME/git"
-alias cdl="cd $HOME/git/libvirt.git/"
-alias cdq="cd $HOME/git/qemu.git/"
+alias cdl="cdg; cd libvirt.git"
+alias cdq="cdg; cd qemu.git"
+alias cdc="cdg; cd libvirt-ci.git"
 
-alias mck="pushd .; cd build; make check && make syntax-check; popd"
-alias ma="pushd .; make clean all check && make syntax-check; popd"
+alias mck="ninja -C `git rev-parse --show-toplevel`/build test"
+alias ma="meson -C build --reconfigure; mck"
 
-if [[ -d "$HOME/git/libvirt.git" ]]; then
-    alias virsh="$HOME/git/libvirt.git/build/tools/virsh -k 0 -K 0"
-else
-    alias virsh="/usr/bin/virsh -k 0 -K 0"
-fi
+alias virsh="/usr/bin/virsh -k 0 -K 0"
