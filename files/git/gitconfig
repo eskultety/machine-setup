@@ -6,19 +6,29 @@
     diff = auto
 
 [alias]
-    st = status
-    co = checkout
-    ci = commit
+    # short command aliases
     br = branch
-    fp = format-patch
+    ci = commit
+    co = checkout
+    cp = cherry-pick
     ds = describe
-    rb = rebase
+    fp = format-patch
+    mg = merge
     pl = pull
+    rb = rebase
+    st = status
+
+    # more sophisticated aliases
+    added = log --diff-filter=A
+    alias = config --get-regexp alias
+    deleted = log --diff-filter=D
+    line = log --pickaxe-all -G
+    mgt = mergetool
+    mr = "!func() { git fetch origin merge-requests/$1/head && git checkout FETCH_HEAD; }; func"
     mine = log --author=Skultety
+    root = rev-parse --show-toplevel
     visual = tig
     vimdiff = !env GIT_EXTERNAL_DIFF=vimgitdiff git --no-pager diff
-    added = log --diff-filter=A
-    deleted = log --diff-filter=D
 
 [format]
     pretty = fuller
@@ -28,6 +38,10 @@
 
 [merge]
     tool = vimdiff
+    guitool = meld
+
+[mergetool "meld"]
+    cmd = meld "$LOCAL" "$BACKUP" "$REMOTE" --output "$MERGED"
 
 [diff]
     renames = true
@@ -38,3 +52,10 @@
 
 [grep]
     patternType = extended
+
+[am]
+    threeWay = true
+
+[rebase]
+    abbreviateCommands = true
+    stat = true
