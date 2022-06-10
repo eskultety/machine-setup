@@ -1,0 +1,103 @@
+#!/bin/sh
+
+BASENAME=$(basename $0)
+PROFILE=""
+GIT_OPTS=""
+
+showHelp()
+{
+    helpstr="
+    usage: gclone [-h|--help] [-p|--profile=personal] [-w|--profile=work]
+           [-d|--depth DEPTH] [-q|--quiet] URL [DIR]\n\n
+
+    Clones a fresh git repo hosted at URL and saves it under DIR. If DIR was\n
+    not provided, 'basename' of URL is used as the resulting directory name.\n\n
+
+    Options:\n
+    -h \tshow help\n
+    -p \tuse the personal git profile (same as '--profile=personal')\n
+    -w \tuse the work git profile (same as '--profile=work')\n
+    -d DEPTH \tspecify the clone depth\n
+    -q \tsuppress all output
+    "
+
+    echo -en $helpstr
+}
+
+OPTS=$(getopt -o hpwd: --long help,profile:,depth: -- "$@")
+[ $? -eq 0 ] || {
+    showHelp
+    exit 1
+}
+
+eval set -- "$OPTS"
+while true; do
+    case "$1" in
+    -h|--help)
+        showHelp
+        exit 0
+        ;;
+
+    -d|--depth)
+        shift
+
+        GIT_OPTS="$GIT_OPTS --depth $1"
+        ;;
+
+    -q|--quiet)
+        GIT_OPTS="--quiet"
+        ;;
+
+    -p)
+        PROFILE="personal"
+        ;;
+    -w)
+        PROFILE="work"
+        ;;
+
+    --profile)
+        shift
+
+        [[ ! "$1" =~ work|personal ]] && {
+            echo "$BASENAME: Invalid profile '$1'"
+            exit 1
+        }
+        PROFILE="$1"
+        ;;
+
+    --)
+        shift
+        break
+        ;;
+
+    esac
+    shift
+done
+
+# positional arguments
+URL="$1"
+DIR="$2"
+
+[ -z $URL ] && {
+    echo "$BASENAME: Missing mandatory argument URL"
+    exit 1
+}
+
+# fill in the defaults
+if [ -z $PROFILE ]; then
+    PROFILE='work'
+fi
+
+if [ -z $DIR ]; then
+    DIR=$(basename "$URL")
+fi
+
+if ! $(git clone $GIT_OPTS $URL $DIR); then
+    exit 1
+fi
+
+TAB="$(printf '\t')"
+cat >> "$DIR/.git/config" << EOF
+[include]
+${TAB}path = ~/.gitconfig-$PROFILE
+EOF
