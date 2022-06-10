@@ -5,7 +5,6 @@
 - name: install PyPi dependencies (NVIM)
   pip:
     name:
-      - jedi
       - neovim
     extra_args: --user
 
