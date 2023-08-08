@@ -1,4 +1,21 @@
 ---
+- name: Set root password
+  user:
+    name: root
+    password: '{{ root_password }}'
+
+- name: Set custom root shell prompt
+  lineinfile:
+    path: /root/.bashrc
+    line: 'export PS1="\[\033[1;31m\]\u@\h \[\033[0m\]\[\033[1;34m\]\W # \[\033[0m\]"'
+    state: present
+
+- name: Override default editor for root
+  lineinfile:
+    path: /root/.bashrc
+    line: "export EDITOR='nvim'"
+    state: present
+
 - name: Create '{{ user.username }}' user account
   user:
     name: '{{ user.username }}'
