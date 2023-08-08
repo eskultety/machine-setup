@@ -1,3 +1,99 @@
+- name: Update all packages
+  package:
+    name: "*"
+    state: latest
+  register: result
+
+- name: Install the core set of wanted packages
+  package:
+    state: latest
+    name:
+      - bash-completion
+      - ethtool
+      - git
+      - htop
+      - man-pages
+      - mc
+      - ncdu
+      - neovim
+      - podman
+      - rpmconf
+      - rsync
+      - tmux
+      - tree
+      - tuned
+      - unzip
+      - util-linux
+      - wget
+      - "{{ ansible_pkg_mgr }}-utils"
+      - "python{{ ansible_python_version.split('.')[0] }}-pip"
+
+- name: Install development packages
+  package:
+    state: latest
+    name:
+      - black
+      - gdb
+      - gcc
+      - git-publish
+      - git-review
+      - ipython3
+      - guestfs-tools
+      - libvirt
+      - libvirt-nss
+      - ltrace
+      - make
+      - meson # drop this one once I move it to a dedicated libvirt role
+      - patch
+      - python3-devel
+      - python3-dnf-plugin-system-upgrade
+      - python3-flake8
+      - python3-ipdb
+      - python3-wheel
+      - rpm-build
+      - ShellCheck
+      - strace
+      - tig
+      - vim-enhanced # provides vimdiff
+      - virt-install
+      - virt-what
+      - valgrind
+  tags:
+    - devel
+
+- name: Install workstation packages
+  package:
+    state: latest
+    name:
+      - '@Fedora Workstation'
+      - android-tools
+      - ansible
+      - bsd-games # contains the wtf command :)
+      - dbus-x11 # provides the dbus-launch command which the dconf task needs
+      - dconf-editor
+      - ffmpeg-libs
+      - flatpak
+      - glances
+      - gimp
+      - gnome-tweaks
+      - inkscape
+      - lm_sensors
+      - NetworkManager-tui
+      - playerctl
+      - powerline
+      - pidgin
+      - thunderbird
+      - tilix
+      - virt-manager
+      - vlc
+      - wireshark
+      - zsh
+    install_weak_deps: false
+    skip_broken: true
+    nobest: true
+  tags:
+    - workstation
+
 - name: Remove generic unwanted packages
   package:
     state: absent
@@ -41,128 +137,9 @@
       - "gnome-shell-extension*"
       - gnome-terminal
       - gnome-weather
-      - "*libreoffice*"
       - "qt*"
       - rhythmbox
       - totem
   ignore_errors: true
   tags:
     - workstation
-
-- name: Update all packages
-  package:
-    name: "*"
-    state: latest
-  register: result
-
-- name: Install core packages
-  package:
-    state: latest
-    name: "{{ item }}"
-  loop:
-    - bash-completion
-    - ethtool
-    - htop
-    - ltrace
-    - man-pages
-    - mc
-    - ncdu
-    - neovim
-    - podman
-    - rpmconf
-    - rsync
-    - strace
-    - tmux
-    - tree
-    - unzip
-    - util-linux
-    - virt-what
-    - wget
-    - "{{ ansible_pkg_mgr }}-utils"
-    - "python{{ ansible_python_version.split('.')[0] }}-pip"
-
-- name: Install development packages
-  package:
-    state: latest
-    name: "{{ item }}"
-  loop:
-    - black
-    - gdb
-    - git
-    - git-publish
-    - git-review
-    - ipython3
-    - libguestfs-tools
-    - libvirt
-    - libvirt-nss
-    - make
-    - meson # drop this one once I move it to a dedicated libvirt role
-    - patch
-    - python3-devel
-    - python3-dnf-plugin-system-upgrade
-    - python3-wheel
-    - rpm-build
-    - tig
-    - virt-install
-    - valgrind
-  tags:
-    - devel
-
-- name: Install core workstation packages
-  package:
-    state: latest
-    name: "{{ item }}"
-  loop:
-    - dbus-x11 # provides the dbus-launch command which the dconf task needs
-    - dconf-editor
-    - ffmpeg-libs
-    - gnome-tweaks
-    - NetworkManager-tui
-    - tilix
-    - tuned
-    - virt-manager
-  ignore_errors: true
-  tags: workstation
-
-- name: Install extra packages (CLI)
-  package:
-    state: latest
-    name: "{{ item }}"
-  loop:
-    - android-tools
-    - ansible
-    - geteltorito
-    - lm_sensors
-    - powerline
-    - python3-flake8
-    - python3-glances
-    - python3-ipdb
-    - vim-powerline
-    - zsh
-  tags:
-    - extras-cli
-
-- name: Install extra packages (GUI)
-  package:
-    state: latest
-    name: "{{ item }}"
-  loop:
-    - bsd-games # contains the wtf command :)
-    - flatpak
-    - gimp
-    - gnome-shell-extension-drive-menu
-    - gnome-shell-extension-launch-new-instance
-    - gnome-shell-extension-suspend-button
-    - gnome-shell-extension-system-monitor-applet
-    - inkscape
-    - meld
-    - playerctl
-    - pidgin
-    - seahorse
-    - thunderbird
-    - vlc
-    - wireshark
-    - youtube-dl
-  ignore_errors: true
-  tags:
-    - extras-gui
