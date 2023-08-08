@@ -47,7 +47,7 @@
       dns=dnsmasq
 
 - name: libvirt-related settings
-  include: tasks/libvirt.yml
+  include_tasks: tasks/libvirt.yml
   tags:
     - devel
     - workstation

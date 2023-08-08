@@ -29,41 +29,45 @@
 
   tasks:
     - name: Repos
-      include: tasks/repos.yml
+      include_tasks: tasks/repos.yml
 
     - name: Packages
-      include: tasks/packages.yml
+      include_tasks: tasks/packages.yml
 
     - name: Services
-      include: tasks/services.yml
+      include_tasks: tasks/services.yml
 
     - name: System configuration
-      include: tasks/system_configuration.yml
+      include_tasks: tasks/system_configuration.yml
 
     - name: User
-      include: tasks/user.yml
+      include_tasks: tasks/user.yml
 
     - name: User configuration
       become: true
       become_user: '{{ user.username }}'
       block:
         - name: neovim
-          include: tasks/nvim.yml
+          include_tasks: tasks/nvim.yml
 
         - name: git
-          include: tasks/git.yml
+          include_tasks: tasks/git.yml
+          tags: devel
 
         - name: GTK
           include: tasks/gtk.yml
 
         - name: Firefox
-          include: tasks/firefox.yml
+          include_tasks: tasks/firefox.yml
+          tags: workstation
 
         - name: Dconf
-          include: tasks/dconf.yml
+          include_tasks: tasks/dconf.yml
+          tags: workstation
 
         - name: Flatpak
-          include: tasks/flatpak.yml
+          include_tasks: tasks/flatpak.yml
+          tags: workstation
 
     - name: Final cleanup
-      include: tasks/cleanup.yml
+      include_tasks: tasks/cleanup.yml
