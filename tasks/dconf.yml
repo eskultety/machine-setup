@@ -2,7 +2,9 @@
   copy:
     src: './dconf'
     dest: '/tmp/'
-    mode: '0755'
+    mode: '0644'
+  tags:
+    - workstation
 
 - name: Copy the populating Python script
   copy:
