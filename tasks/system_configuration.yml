@@ -19,6 +19,7 @@
     - regexp: '(^\s*GRUB_CMDLINE_LINUX(?:_DEFAULT)?\=\"\s*.*?)(?:quiet)*(.*\"*$)'
       replace: '\1\2'
   notify: update-grub
+  when: ansible_system_vendor == "QEMU"
 
 # - name: Disable wayland
 #   lineinfile:
