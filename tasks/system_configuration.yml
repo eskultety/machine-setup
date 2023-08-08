@@ -39,13 +39,6 @@
       SystemMaxFiles=1
   notify: restart-journald
 
-- name: NetworkManager - use dnsmasq as local resolver
-  copy:
-    dest: /etc/NetworkManager/conf.d/dnsmasq_local_resolver.conf
-    content: |
-      [main]
-      dns=dnsmasq
-
 - name: libvirt-related settings
   include_tasks: tasks/libvirt.yml
   tags:
