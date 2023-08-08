@@ -1,13 +1,18 @@
 - name: Enable services
   block:
-    - name: Enable generic services
+    - name: Enable SSH
       service:
-        name: "{{ item }}"
+        name: sshd
         state: started
         enabled: yes
-      loop:
-        - cups-browsed
-        - sshd
+
+    - name: Enable cups
+      service:
+        name: cups-browsed
+        state: started
+        enabled: yes
+      tags:
+        - workstation
 
     - name: Enable libvirt service
       service:
