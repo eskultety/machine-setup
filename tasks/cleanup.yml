@@ -1,4 +1,8 @@
 ---
+- name: Clean package cache
+  changed_when: false
+  command: dnf clean packages
+
 - name: Autoremove unused packages
   dnf:
     autoremove: true
