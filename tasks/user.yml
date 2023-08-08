@@ -64,7 +64,7 @@
         src: '/dev/null'
         dest: '/home/{{ user.username }}/.config/systemd/user/{{ item }}'
         state: link
-      with_items:
+      loop:
         - tracker-extract.service
         - tracker-miner-apps.service
         - tracker-miner-fs.service
