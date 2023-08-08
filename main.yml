@@ -54,8 +54,9 @@
           include_tasks: tasks/git.yml
           tags: devel
 
-        - name: GTK
-          include: tasks/gtk.yml
+        # - name: GTK
+        #   include_tasks: tasks/gtk.yml
+        #   tags: workstation
 
         - name: Firefox
           include_tasks: tasks/firefox.yml
