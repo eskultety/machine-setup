@@ -6,14 +6,15 @@
   tags:
     - workstation
 
-- name: Copy the populating Python script
-  copy:
-    src: './dconf.py'
-    dest: '/tmp/'
-    mode: '0755'
-
-- name: Populate the dconf database from config files
-  shell:
-    cmd: '/tmp/dconf.py'
-    chdir: '/tmp/'
+- shell: dbus-launch dconf load /{{ item | replace ('_', '/') }}/ < {{ item }}
+  args:
+    chdir: /tmp/dconf
+    stdin_add_newline: false
+  loop:
+    - system
+    - com_gexperts_Tilix
+    - org_gnome_desktop
+    - org_gnome_mutter
+    - org_gnome_shell
+    - org_gnome_settings-daemon_plugins
 
