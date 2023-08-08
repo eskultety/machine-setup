@@ -26,13 +26,13 @@
 - name: Copy bash configuration
   copy:
     src: '../files/bash/'
-    dest: '/home/{{ user.username }}/.bash'
+    dest: '/home/{{ user.username }}/.bash.d'
     owner: '{{ user.username }}'
     group: '{{ user.username }}'
 
 - name: Override bashrc
   file:
-    src: '/home/{{ user.username }}/.bash/bashrc'
+    src: '/home/{{ user.username }}/.bash.d/bashrc'
     dest: '/home/{{ user.username }}/.bashrc'
     force: true
     mode: '0660'
