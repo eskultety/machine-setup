@@ -11,10 +11,16 @@
 
     - name: Enable libvirt service
       service:
-        name: libvirtd
+        name: "{{ item }}.socket"
         state: started
         enabled: yes
+      loop:
+        - virtqemud
+        - virtnwfilterd
+        - virtnetworkd
+        - virtstoraged
       tags:
+        - workstation
         - devel
 
 # run this only on baremetal machines
