@@ -3,8 +3,6 @@
     src: './dconf'
     dest: '/tmp/'
     mode: '0644'
-  tags:
-    - workstation
 
 - shell: dbus-launch dconf load /{{ item | replace ('_', '/') }}/ < {{ item }}
   args:
