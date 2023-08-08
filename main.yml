@@ -7,16 +7,20 @@
       service:
         name: sshd
         state: restarted
+
     - name: restart-libvirtd
       service:
         name: libvirtd
         state: restarted
+
     - name: restart-journald
       service:
         name: systemd-journald
         state: restarted
+
     - name: update-grub
       command: grub2-mkconfig -o /boot/grub2/grub.cfg
+
     - name: reboot-machine
       reboot:
 
