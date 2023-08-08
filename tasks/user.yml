@@ -40,6 +40,12 @@
     owner: '{{ user.username }}'
     group: '{{ user.username }}'
 
+- name: Inject SSH public key
+  authorized_key:
+    user: '{{ user.username }}'
+    key: '{{ user.key }}'
+    state: present
+
 - name: Copy bash configuration
   copy:
     src: '../files/bash/'
