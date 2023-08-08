@@ -1,7 +1,15 @@
 - name: Remove generic unwanted packages
   package:
     state: absent
-    name: "{{ item }}"
+    name:
+      - anaconda
+      - NetworkManager-adsl
+      - NetworkManager-openconnect
+      - NetworkManager-pptp
+      - NetworkManager-team
+      - NetworkManager-vpnc
+      - NetworkManager-wwan
+      - telnet
   ignore_errors: true
   loop:
     - anaconda
@@ -14,10 +22,9 @@
     - telnet
 
 - name: Remove workstation unwanted packages
-  yum:
+  package:
     state: absent
-    name: "{{ item }}"
-  loop:
+    name:
       - baobab
       - cheese
       - evolution
@@ -38,6 +45,7 @@
       - "qt*"
       - rhythmbox
       - totem
+  ignore_errors: true
   tags:
     - workstation
 
