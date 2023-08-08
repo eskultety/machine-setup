@@ -1,2 +1,4 @@
 ---
 ansible_python_interpreter: '/usr/bin/env python3'
+ansible_ssh_common_args: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+ansible_ssh_timeout: 60
