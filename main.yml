@@ -1,5 +1,8 @@
 ---
 - hosts: all
+  gather_subset:
+    - distribution
+    - hardware
   vars_files:
     - vars/users.yml
   handlers:
