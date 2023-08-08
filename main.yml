@@ -54,6 +54,12 @@
           include_tasks: tasks/git.yml
           tags: devel
 
+        - name: scripts
+          include_tasks: tasks/user_scripts.yml
+          tags:
+            - devel
+            - workstation
+
         # - name: GTK
         #   include_tasks: tasks/gtk.yml
         #   tags: workstation
