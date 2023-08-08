@@ -20,13 +20,14 @@
       replace: '\1\2'
   notify: update-grub
 
-- name: Disable wayland
-  lineinfile:
-    path: /etc/gdm/custom.conf
-    regexp: '#(WaylandEnable=false)'
-    line: '\1'
-    backrefs: yes
-
+# - name: Disable wayland
+#   lineinfile:
+#     path: /etc/gdm/custom.conf
+#     regexp: '#(WaylandEnable=false)'
+#     line: '\1'
+#     backrefs: yes
+#   tags:
+#     - workstation
 
 - name: Override default journald settings
   blockinfile:
