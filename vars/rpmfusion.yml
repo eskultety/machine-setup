@@ -1,7 +1,10 @@
 ---
 baseurl: "https://mirrors.rpmfusion.org"
-free:
-  rpm: "{{ baseurl }}/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+gpg_install_path: "/usr/share/distribution-gpg-keys/rpmfusion/"
 
-nonfree:
-  rpm: "{{ baseurl }}/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+rpmfusion:
+  free:
+    rpm: "{{ baseurl }}/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+
+  nonfree:
+    rpm: "{{ baseurl }}/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"

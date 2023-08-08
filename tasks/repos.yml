@@ -2,19 +2,23 @@
 - include_vars: vars/rpmfusion.yml
 
 - block:
-  - name: Enable RPM fusion
-    dnf:
-      name:
-        - "{{ free.rpm }}"
-        - "{{ nonfree.rpm }}"
-      disable_gpg_check: true
-      state: present
+    - name: Install various distribution RPM keys
+      dnf:
+        name:
+          - distribution-gpg-keys
+        state: latest
 
-  - name: Enable virt-preview repo
-    command: "dnf copr enable -y @virtmaint-sig/virt-preview"
-    args:
-      warn: false
-    tags:
-      - devel
+    - name: import RPM fusion GPG keys
+      rpm_key:
+        key: "{{ gpg_install_path }}/RPM-GPG-KEY-rpmfusion-{{ item }}-fedora-{{ ansible_distribution_version }}"
+        state: present
+      loop: "{{ rpmfusion.keys() | list }}"
+
+    - name: Enable RPM fusion
+      dnf:
+        name:
+          - "{{ rpmfusion.free.rpm }}"
+          - "{{ rpmfusion.nonfree.rpm }}"
+        state: present
   when:
     - ansible_distribution  == "Fedora"
