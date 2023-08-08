@@ -22,3 +22,19 @@
         state: present
   when:
     - ansible_distribution  == "Fedora"
+
+- name: Check if virt-preview repo is installed
+  shell: "dnf repolist | grep -q virt-preview"
+  changed_when: false
+  ignore_errors: true
+  register: result
+  tags:
+    - devel
+
+- name: Enable virt-preview repo
+  command: "dnf copr enable -y @virtmaint-sig/virt-preview"
+  when:
+    - ansible_distribution  == "Fedora"
+    - result.rc != 0
+  tags:
+    - devel
