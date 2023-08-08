@@ -6,6 +6,7 @@
   pip:
     name:
       - neovim
+    state: present
     extra_args: --user
 
 - name: create config directory hierarchy (NVIM)
