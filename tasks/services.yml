@@ -26,3 +26,15 @@
   when: ansible_system_vendor != "QEMU"
   loop:
     - fstrim.timer
+
+- name: Make runlevel 5 default
+  block:
+    - command: "systemctl get-default"
+      changed_when: false
+      register: systemdefault
+
+    - name: Make runlevel 5 default
+      command: "systemctl set-default graphical.target"
+      when: "'graphical' not in systemdefault.stdout"
+  tags:
+    - workstation
