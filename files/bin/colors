@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#256-color background escape sequence
+bg_esc='48;5'
+
+#256-color foreground escape sequence
+fg_esc='38;5'
+
+function display ()
+{
+    offset=6
+    for color in $(seq $1 $2); do
+        #Display the color
+        printf "\e[30m\e[${bg_esc};${color}m%4d\e[0m" "${color}"
+        #Display 6 colors per lines
+        offset=$(( offset - 1 ))
+        if [ $offset == 0 ] ; then
+            echo #New line
+            offset=6
+        fi
+    done
+    echo #New line
+}
+
+#first display basic 16 palette
+display 0 15
+
+#then display the rest
+display 16 255
