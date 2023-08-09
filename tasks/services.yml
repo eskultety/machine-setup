@@ -6,14 +6,6 @@
         state: started
         enabled: yes
 
-    - name: Enable cups
-      service:
-        name: cups-browsed
-        state: started
-        enabled: yes
-      tags:
-        - workstation
-
     - name: Enable libvirt service
       service:
         name: libvirtd
