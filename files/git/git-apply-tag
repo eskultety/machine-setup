@@ -1,0 +1,46 @@
+#!/bin/bash
+
+usage()
+{
+    echo "Usage git apply-tag [-s since] tag..." >&2
+    exit 1
+}
+
+since=
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -s)
+            shift
+            [[ $# -gt 0 ]] || usage
+            since=$1
+            ;;
+        -*)
+            usage
+            ;;
+
+        *)
+            break
+            ;;
+    esac
+    shift
+done
+
+if [[ $# -eq 0 ]]; then
+    usage
+fi
+
+tags=
+while [[ $# -gt 0 ]]; do
+    tags="$tags \"$1\""
+    shift
+done
+
+if [[ $since ]]; then
+    GIT_EDITOR=true
+    git rebase --interactive --exec "$0 $tags" $since
+else
+    export GIT_EDITOR="git interpret-trailers --in-place --trailer $tags"
+    exec git commit --amend
+fi
+

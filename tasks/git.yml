@@ -8,6 +8,11 @@
     - 'gitconfig-personal'
     - 'gitignore'
 
+- name: Copy tag application script
+  copy:
+    src: '../files/git/git-apply-tag'
+    dest: '/home/{{ user.username }}/bin/git-apply-tag'
+
 - name: Create the HOME/git directory
   file:
     path: '/home/{{ user.username }}/git'
