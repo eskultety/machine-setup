@@ -47,6 +47,11 @@
       become: true
       become_user: '{{ user.username }}'
       block:
+        - name: Create ~/bin
+          file:
+            dest: '/home/{{ user.username }}/bin'
+            state: directory
+
         - name: neovim
           include_tasks: tasks/nvim.yml
 
