@@ -9,6 +9,7 @@
     state: latest
     name:
       - bash-completion
+      - cronie
       - ethtool
       - git
       - htop
