@@ -12,6 +12,7 @@
   copy:
     src: '../files/git/git-apply-tag'
     dest: '/home/{{ user.username }}/bin/git-apply-tag'
+    mode: '0755'
 
 - name: Create the HOME/git directory
   file:
