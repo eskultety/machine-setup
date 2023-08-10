@@ -89,6 +89,7 @@ enable=false
 
 [peripherals/touchpad]
 two-finger-scrolling-enabled=true
+natural-scroll=false
 
 [screensaver]
 color-shading-type='solid'
