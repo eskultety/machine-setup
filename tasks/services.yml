@@ -9,6 +9,15 @@
         - sshd
         - systemd-resolved
 
+    - name: Enable TLP service
+      service:
+        name: tlp
+        state: started
+        enabled: yes
+      when:
+        - ansible_system_vendor | lower == 'lenovo'
+        - '"thinkpad" in ansible_product_version | lower'
+
     - name: Enable libvirt service
       service:
         name: "{{ item }}.socket"

@@ -46,3 +46,15 @@
   tags:
     - devel
     - workstation
+
+- name: Set battery charging thresholds
+  blockinfile:
+    path: /etc/tlp.conf
+    block: |
+      '{{ item.key }}={{ item.val }}'
+  loop:
+    - {key: 'START_CHARGE_THRESH_BAT0', val: 40}
+    - {key: 'STOP_CHARGE_THRESH_BAT0', val: 70}
+  when:
+    - ansible_system_vendor | lower == 'lenovo'
+    - '"thinkpad" in ansible_product_version | lower'

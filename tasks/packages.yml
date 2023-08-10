@@ -94,6 +94,14 @@
   tags:
     - workstation
 
+- name: Install TLP battery management SW
+  package:
+    state: latest
+    name: tlp
+  when:
+    - ansible_system_vendor | lower == 'lenovo'
+    - '"thinkpad" in ansible_product_version | lower'
+
 - name: Remove generic unwanted packages
   package:
     state: absent
