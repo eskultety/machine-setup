@@ -14,6 +14,7 @@
     ds = describe
     fp = format-patch
     mg = merge
+    mt = mergetool
     pl = pull
     rb = rebase
     st = status
@@ -23,9 +24,11 @@
     alias = config --get-regexp alias
     deleted = log --diff-filter=D
     line = log --pickaxe-all -G
+    log1 = log --oneline
     mgt = mergetool
     mr = "!func() { git fetch origin merge-requests/$1/head && git checkout FETCH_HEAD; }; func"
     mine = log --author=Skultety
+    rbsquash = !git -c sequence.editor=: rebase -i --autosquash
     root = rev-parse --show-toplevel
     visual = tig
     vimdiff = !env GIT_EXTERNAL_DIFF=vimgitdiff git --no-pager diff
@@ -57,5 +60,6 @@
     threeWay = true
 
 [rebase]
+    autosquash = true
     abbreviateCommands = true
     stat = true
