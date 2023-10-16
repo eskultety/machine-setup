@@ -27,6 +27,7 @@
     log1 = log --oneline
     mgt = mergetool
     mr = "!func() { git fetch origin merge-requests/$1/head && git checkout FETCH_HEAD; }; func"
+    pr = "!func() { git fetch origin pull/$1/head && git checkout FETCH_HEAD; }; func"
     mine = log --author=Skultety
     rbsquash = !git -c sequence.editor=: rebase -i --autosquash
     root = rev-parse --show-toplevel
