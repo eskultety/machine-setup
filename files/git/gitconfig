@@ -60,6 +60,9 @@
 [am]
     threeWay = true
 
+[push]
+    autoSetupRemote = true
+
 [rebase]
     autosquash = true
     abbreviateCommands = true
