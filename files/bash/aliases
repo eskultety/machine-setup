@@ -3,7 +3,13 @@ alias vim='nvim'
 alias ff='firefox'
 
 # git aliases
+# ===========
 alias g='git'
+
+# this registers 'g' as the main git command alias and enables bash
+# completion for it; pairs nicely with git aliases
+__git_complete g __git_main
+
 alias grb='git rebase'
 alias grbc='git rebase --continue'
 alias ggrep='git grep -Enpi'
